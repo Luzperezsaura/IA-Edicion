@@ -4,12 +4,12 @@ import pandas as pd #type: ignore
 from sklearn.model_selection import train_test_split #type: ignore
 
 # --- CONFIGURACIÓN ---
-CSV_PATH = 'C:/Users/mluzp/Desktop/Etiquetas/datos_sin_duplicados.csv'           # Ruta a tu CSV
-IMAGES_DIR = 'C:/Users/mluzp/Desktop/Etiquetas'   # Carpeta con tus PNGs actuales
+CSV_PATH = 'C:/Users/mluzp/Desktop/Etiquetas/datos_sin_duplicados.csv'           # Ruta al archivo CSV de las etiquetas
+IMAGES_DIR = 'C:/Users/mluzp/Desktop/Etiquetas'   # Ruta a la carpeta con imagenes actuales
 OUTPUT_DIR = 'dataset_biomecanica'   # Carpeta donde se creará el dataset YOLO
-PADDING_BBOX = 0.40                  # 40% de margen para el Bounding Box
+PADDING_BBOX = 0.40                  # 40% de margen para el Bounding Box, con 10% algunos puntos quedaban sobre la linea
 
-# El orden estricto de tus keypoints
+# El orden de los keypoints
 KPT_ORDER = ['pi1', 'pi2', 'ti1', 'ti2']
 
 def setup_directories():
@@ -22,7 +22,7 @@ def process_dataset():
     setup_directories()
     
     # 1. Cargar CSV (sin cabeceras según la captura)
-    # Asumimos las columnas por tu captura: id, x, y, filename, width, height
+    # Columnas: id de punto, x, y, id imagen, ancho, altura
     column_names = ['kpt_id', 'x', 'y', 'filename', 'width', 'height']
     df = pd.read_csv(CSV_PATH, header=None, names=column_names)
     
@@ -59,9 +59,7 @@ def process_dataset():
         ancho_puntos = max_x - min_x
         alto_puntos = max_y - min_y
         
-        # EL SECRETO: Forzar un tamaño mínimo de caja 
-        # (ej. mínimo 15% del ancho de la foto y 30% del alto)
-        # Esto asegura que capture toda la pantorrilla y el talón
+        # Forzar tamaño mínimo de bounding box para evitar errores por puntos fuera de la caja (mínimo 15% del ancho de la foto y 30% del alto)
         bbox_w = max(ancho_puntos * 1.5, 0.15) 
         bbox_h = max(alto_puntos * 1.2, 0.30)
         
@@ -89,7 +87,7 @@ def process_dataset():
         # Diccionario rápido para buscar los keypoints de esta imagen
         kpts_dict = group.set_index('kpt_id')[['x_norm', 'y_norm']].to_dict('index')
         
-        # Procesar en el orden estricto
+        # Procesar en el orden estricto de los puntos
         for kpt in KPT_ORDER:
             if kpt in kpts_dict:
                 x = kpts_dict[kpt]['x_norm']
@@ -105,12 +103,12 @@ def process_dataset():
             
         valid_images.append(filename)
         
-    # 4. Train/Val Split
+    # 4. Divido en conjunto de entrenamiento y conjunto de validación (80/20)
     print(f"Total imágenes a procesar: {len(valid_images)}")
     #train_imgs, val_imgs = train_test_split(valid_images, test_size=0.20, random_state=42)
     train_imgs, val_imgs = train_test_split(valid_images, test_size=0.20, shuffle=False)
     
-    # 5. Mover archivos a la estructura YOLO
+    # 5. Estructura YOLO
     def move_files(file_list, split_name):
         for img_name in file_list:
             txt_name = img_name.replace('.png', '.txt').replace('.jpg', '.txt')

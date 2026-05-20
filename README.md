@@ -21,3 +21,9 @@ Se cambia el modelo de nano a medium y se suben las epocas a 150 para mejorar la
 ```
 !yolo pose train data=/content/data.yaml model=yolov8m-pose.pt epochs=150 imgsz=1024 batch=8 project=biomecanica name=modelo_izq_v1 device=0 fliplr=0.0
 ```
+
+### Prueba 4:
+Mismo modelo que prueba 2 pero con mayor cantidad de imagenes (~800) se pasa a 50 epocas por tiempo de ejecución.
+```
+!yolo pose train data=/content/data.yaml model=yolov8m-pose.pt epochs=50 imgsz=1024 batch=8 project=biomecanica name=modelo_izq_v1 device=0 fliplr=0.0
+```

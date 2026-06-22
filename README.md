@@ -1,6 +1,7 @@
 # IA-Edicion
 Repositorio de entrenamiento de red neuronal para la edición de estudios biomecánicos de la marcha.
-En los diferentes cuadernos están las diferentes versiones de entrenamiento con los cambios que se fueron aplicando.
+En los diferentes cuadernos están las diferentes versiones de entrenamiento con los cambios que se fueron aplicando. Se utiliza el modelo YOLO-v8 de Ultralytics.
+Los archivos de "basedatos-plano_lado.py" permiten estructurar y normalizar los datos extraidos desde el sistema al formato que requiere YOLO (Proceso ETL).
 
 ### Prueba 1:
 Prueba de concepto con el modelo YOLO-v8 nano 

@@ -6,26 +6,26 @@ from PIL import ImageFile #type: ignore
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 # =====================================================================
-# --- CONFIGURACIÓN: PLANO POSTERIOR DERECHO (RETROPIE) ---
+# --- CONFIGURACIÓN: PLANO POSTERIOR IZQUIERDO (RETROPIE) ---
 # =====================================================================
 
 # ¡ATENCIÓN! Reemplazar estos valores por las etiquetas exactas del CSV de KinnX
-KPT_ORDER = ['pd1', 'pd2', 'td1', 'td2'] 
+KPT_ORDER = ['pi1', 'pi2', 'ti1', 'ti2'] 
 
 # Carpeta de salida EXCLUSIVA para este modelo
-OUTPUT_DIR = 'C:/Users/mluzp/Desktop/Proyecto IA/dataset_retropie_der'
+OUTPUT_DIR = 'C:/Users/mluzp/Desktop/Proyecto IA/dataset_retropie_izq'
 
 # Orígenes de datos 
 FUENTES_DATOS = [
     {
         'prefix': 'vluro', 
-        'csv_path': 'C:/Users/mluzp/Desktop/imagenesia/tmRetroPieDer/etiquetas.csv',
-        'images_dir': 'C:/Users/mluzp/Desktop/imagenesia/tmRetroPieDer'
+        'csv_path': 'C:/Users/mluzp/Desktop/imagenesia/tmRetroPieIzq/etiquetas.csv',
+        'images_dir': 'C:/Users/mluzp/Desktop/imagenesia/tmRetroPieIzq'
     },
     {
         'prefix': 'belgr', 
-        'csv_path': 'C:/Users/mluzp/Desktop/Proyecto IA/IMAGENES FOOTX IA - 1 VO/tmRetroPieDer/etiquetas.csv',
-        'images_dir': 'C:/Users/mluzp/Desktop/Proyecto IA/IMAGENES FOOTX IA - 1 VO/tmRetroPieDer/'
+        'csv_path': 'C:/Users/mluzp/Desktop/Proyecto IA/IMAGENES FOOTX IA - 1 VO/tmRetroPieIzq/etiquetas.csv',
+        'images_dir': 'C:/Users/mluzp/Desktop/Proyecto IA/IMAGENES FOOTX IA - 1 VO/tmRetroPieIzq/'
     }
 ]
 

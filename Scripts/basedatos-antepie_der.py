@@ -11,21 +11,15 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 # ¡ATENCIÓN! Reemplazar estos valores por las etiquetas exactas del CSV de KinnX
 KPT_ORDER = ['p1', 'p2', 'p3'] 
-
 # Carpeta de salida EXCLUSIVA para este modelo
-OUTPUT_DIR = 'C:/Users/mluzp/Desktop/Proyecto IA/dataset_antepie_der'
+OUTPUT_DIR = 'C:/Users/mluzp/Desktop/Proyecto IA/dataset_antepie_der-val'
 
 # Orígenes de datos 
 FUENTES_DATOS = [
     {
-        'prefix': 'vluro', 
-        'csv_path': 'E:/Extraccion_VLuro/tmAntepieDer/etiquetas.csv',
-        'images_dir': 'E:/Extraccion_VLuro/tmAntepieDer'
-    },
-    {
-        'prefix': 'belgr', 
-        'csv_path': 'E:/Extraccion_Belgrano/tmAntepieDer/etiquetas.csv',
-        'images_dir': 'E:/Extraccion_Belgrano/tmAntepieDer'
+        'prefix': 'val', 
+        'csv_path': 'C:/Users/mluzp/Desktop/Proyecto IA/IMAGENES FOOTX IA - 2vo/tmAntepieDer/etiquetas.csv',
+        'images_dir': 'C:/Users/mluzp/Desktop/Proyecto IA/IMAGENES FOOTX IA - 2vo/tmAntepieDer/'
     }
 ]
 
@@ -45,7 +39,7 @@ def process_dataset():
     print("Leyendo y unificando fuentes de datos del Plano Antepié...")
     for fuente in FUENTES_DATOS:
         if not os.path.exists(fuente['csv_path']):
-            print(f"⚠️ ADVERTENCIA: No se encontró el CSV en: {fuente['csv_path']}. Saltando esta fuente.")
+            print(f"ADVERTENCIA: No se encontró el CSV en: {fuente['csv_path']}. Saltando esta fuente.")
             continue
             
         df_temp = pd.read_csv(fuente['csv_path'], header=None, names=column_names)

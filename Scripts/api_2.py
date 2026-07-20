@@ -16,8 +16,8 @@ app = FastAPI()
 # ==========================
 # Cargar los modelos YOLO
 # ==========================
-BASE_DIR = 'C:/Users/mluzp/Desktop/Proyecto IA/MODELOS/FINAL'
-
+#BASE_DIR = 'C:/Users/mluzp/Desktop/Proyecto IA/MODELOS/FINAL'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 models = {
     "A": YOLO(os.path.join(BASE_DIR, "best_retropie_derL.pt")), 
     "B": YOLO(os.path.join(BASE_DIR, "best-RetroPieIzq.pt")), 

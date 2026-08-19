@@ -79,7 +79,7 @@ async def predict(
         # ==========================
         # Predicciones con Keypoints
         # ==========================
-        results = model.predict(source=gray_3ch, conf=0.1, verbose=False)
+        results = model.predict(source=gray_3ch, conf=0.3, verbose=False)
 
         puntos = {}
         
@@ -100,7 +100,9 @@ async def predict(
         # ==========================
         return JSONResponse(content={
             "modelo": modelo,
-            "puntos": puntos
+            "puntos": puntos, 
+            "puntos_originales": puntos, #para mantener estructura original de seba y que no se rompa
+            "cajas": {} #para mantener estructura original de seba y que no se rompa
         })
 
     except Exception as e:

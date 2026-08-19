@@ -16,14 +16,14 @@ app = FastAPI()
 # ==========================
 # Cargar los modelos YOLO
 # ==========================
-#BASE_DIR = 'C:/Users/mluzp/Desktop/Proyecto IA/MODELOS/FINAL'
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = 'C:/Users/mluzp/Desktop/Proyecto IA/MODELOS/FINAL'
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 models = {
-    "A": YOLO(os.path.join(BASE_DIR, "best_retropie_derL.pt")), 
-    "B": YOLO(os.path.join(BASE_DIR, "best-RetroPieIzq.pt")), 
-    "C": YOLO(os.path.join(BASE_DIR, "best-sagitallarge.pt")), 
-    "D": YOLO(os.path.join(BASE_DIR, "best_antepieDerLarge.pt")), 
-    "E": YOLO(os.path.join(BASE_DIR, "best_antepie_izq.pt")), 
+    "A": YOLO(os.path.join(BASE_DIR, "modeloA", "best.pt")), 
+    "B": YOLO(os.path.join(BASE_DIR, "modeloA", "best.pt")), 
+    "C": YOLO(os.path.join(BASE_DIR, "modeloA", "best.pt")), 
+    "D": YOLO(os.path.join(BASE_DIR, "modeloA", "best.pt")), 
+    "E": YOLO(os.path.join(BASE_DIR, "modeloA", "best.pt")), 
 }
 
 # Diccionario con el orden exacto de los nombres de los puntos que espera cada modelo
@@ -113,4 +113,4 @@ async def predict(
 # Ejecutar servidor
 # ==========================
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=7000)
